@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService
@@ -33,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService
             Customer customer=Customer.builder()
                     .name(customerRequest.getName())
                     .email(customerRequest.getEmail())
-                    .password(passwordEncoder.encode(customerRequest.getPassword()))
+                    //.password(passwordEncoder.encode(customerRequest.getPassword()))
                     .dob(customerRequest.getDob())
                     .phone(customerRequest.getPhone())
                     .address(customerRequest.getAddress())
@@ -70,10 +71,10 @@ Customer updateDetails= customerOptional.get();
 
             updateDetails.setEmail(customerRequest.getEmail());
         }
-            if (updateDetails.getPassword()!=null);{
+            //if (updateDetails.getPassword()!=null);{
 
-            updateDetails.setPassword(passwordEncoder.encode(customerRequest.getPassword()));
-        }
+            //updateDetails.setPassword(passwordEncoder.encode(customerRequest.getPassword()));
+        //}
             if (updateDetails.getDob()!=null);{
 
             updateDetails.setDob(customerRequest.getDob());

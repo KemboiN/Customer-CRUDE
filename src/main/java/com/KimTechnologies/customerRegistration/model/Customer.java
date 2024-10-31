@@ -34,9 +34,9 @@ public class Customer {
     private String phone;
   @Email(message = "valid email address")@NotNull
     private String email;
-  @Size(min = 8, message = "password should be minimum 8 characters ")
-  @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).+$")
-    private String password;
+  //@Size(min = 8, message = "password should be minimum 8 characters ")
+  //@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).+$")
+   // private String password;
 
 
 }

@@ -27,7 +27,8 @@ public class CustomerRequest
     private String phone;
     @Schema(description = "Email", example = "nehemiahkimutai32@gmail.com", required = true)
     private String email;
-    @Schema(description = "Password", example = "", required = true)
-    private String password;
+    // with password field
+   //@Schema(description = "Password", example = "", required = true)
+    //private String password;
 
 }
