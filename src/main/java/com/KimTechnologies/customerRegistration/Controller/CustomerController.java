@@ -1,11 +1,11 @@
-package com.PrestoTechnologies.customerRegistration.Controller;
+package com.KimTechnologies.customerRegistration.Controller;
 
-import com.PrestoTechnologies.customerRegistration.Dto.CustomerRequest;
-import com.PrestoTechnologies.customerRegistration.Dto.Response;
-import com.PrestoTechnologies.customerRegistration.Repository.CustomerRepo;
-import com.PrestoTechnologies.customerRegistration.Service.CustomerService;
-import com.PrestoTechnologies.customerRegistration.Service.SmsService;
-import com.PrestoTechnologies.customerRegistration.model.Customer;
+import com.KimTechnologies.customerRegistration.Dto.CustomerRequest;
+import com.KimTechnologies.customerRegistration.Dto.Response;
+import com.KimTechnologies.customerRegistration.Repository.CustomerRepo;
+import com.KimTechnologies.customerRegistration.Service.CustomerService;
+import com.KimTechnologies.customerRegistration.Service.SmsService;
+import com.KimTechnologies.customerRegistration.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

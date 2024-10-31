@@ -1,9 +1,9 @@
-package com.PrestoTechnologies.customerRegistration.Service;
+package com.KimTechnologies.customerRegistration.Service;
 
 
-import com.PrestoTechnologies.customerRegistration.Dto.CustomerRequest;
-import com.PrestoTechnologies.customerRegistration.Dto.Response;
-import com.PrestoTechnologies.customerRegistration.model.Customer;
+import com.KimTechnologies.customerRegistration.Dto.CustomerRequest;
+import com.KimTechnologies.customerRegistration.Dto.Response;
+import com.KimTechnologies.customerRegistration.model.Customer;
 
 import java.util.List;
 

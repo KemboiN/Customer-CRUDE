@@ -1,6 +1,6 @@
-package com.PrestoTechnologies.customerRegistration.Repository;
+package com.KimTechnologies.customerRegistration.Repository;
 
-import com.PrestoTechnologies.customerRegistration.model.Customer;
+import com.KimTechnologies.customerRegistration.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

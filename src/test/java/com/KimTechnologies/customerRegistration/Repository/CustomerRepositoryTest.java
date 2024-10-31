@@ -1,7 +1,7 @@
-package com.PrestoTechnologies.customerRegistration.Repository;
+package com.KimTechnologies.customerRegistration.Repository;
 
-import com.PrestoTechnologies.customerRegistration.Dto.CustomerRequest;
-import com.PrestoTechnologies.customerRegistration.model.Customer;
+import com.KimTechnologies.customerRegistration.Dto.CustomerRequest;
+import com.KimTechnologies.customerRegistration.model.Customer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

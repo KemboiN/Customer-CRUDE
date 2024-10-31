@@ -1,6 +1,6 @@
-package com.PrestoTechnologies.customerRegistration.Service;
+package com.KimTechnologies.customerRegistration.Service;
 
-import com.PrestoTechnologies.customerRegistration.Dto.MessageRequest;
+import com.KimTechnologies.customerRegistration.Dto.MessageRequest;
 import org.springframework.stereotype.Service;
 
 @Service

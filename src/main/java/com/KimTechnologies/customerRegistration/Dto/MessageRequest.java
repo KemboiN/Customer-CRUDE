@@ -1,4 +1,4 @@
-package com.PrestoTechnologies.customerRegistration.Dto;
+package com.KimTechnologies.customerRegistration.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

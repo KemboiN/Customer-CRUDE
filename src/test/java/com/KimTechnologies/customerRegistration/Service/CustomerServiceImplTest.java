@@ -1,4 +1,4 @@
-package com.PrestoTechnologies.customerRegistration.Service;
+package com.KimTechnologies.customerRegistration.Service;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

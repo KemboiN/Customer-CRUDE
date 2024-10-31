@@ -1,11 +1,11 @@
-package com.PrestoTechnologies.customerRegistration.Service;
+package com.KimTechnologies.customerRegistration.Service;
 
-import com.PrestoTechnologies.customerRegistration.Dto.CustomerRequest;
-import com.PrestoTechnologies.customerRegistration.Dto.MessageRequest;
-import com.PrestoTechnologies.customerRegistration.Dto.Response;
-import com.PrestoTechnologies.customerRegistration.Exceptions.CustomerRegisteredException;
-import com.PrestoTechnologies.customerRegistration.Repository.CustomerRepo;
-import com.PrestoTechnologies.customerRegistration.model.Customer;
+import com.KimTechnologies.customerRegistration.Exceptions.CustomerRegisteredException;
+import com.KimTechnologies.customerRegistration.Dto.CustomerRequest;
+import com.KimTechnologies.customerRegistration.Dto.MessageRequest;
+import com.KimTechnologies.customerRegistration.Dto.Response;
+import com.KimTechnologies.customerRegistration.Repository.CustomerRepo;
+import com.KimTechnologies.customerRegistration.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

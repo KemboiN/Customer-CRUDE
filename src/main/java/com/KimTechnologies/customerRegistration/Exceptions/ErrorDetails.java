@@ -1,4 +1,4 @@
-package com.PrestoTechnologies.customerRegistration.Exceptions;
+package com.KimTechnologies.customerRegistration.Exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.PrestoTechnologies.customerRegistration.Exceptions;
+package com.KimTechnologies.customerRegistration.Exceptions;
 
 public class CustomerRegisteredException  extends  RuntimeException
 {

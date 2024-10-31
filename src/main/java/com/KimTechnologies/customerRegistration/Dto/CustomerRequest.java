@@ -1,4 +1,4 @@
-package com.PrestoTechnologies.customerRegistration.Dto;
+package com.KimTechnologies.customerRegistration.Dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
