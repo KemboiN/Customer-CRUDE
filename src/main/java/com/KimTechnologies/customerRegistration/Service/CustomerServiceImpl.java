@@ -25,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService
     SmsService smsService;
     @Autowired
     PasswordEncoder passwordEncoder;
+    private  CustomerRequest customerRequest;
     @Override
     @Transactional
     public Response createAccount(CustomerRequest customerRequest) {
@@ -63,11 +64,12 @@ public class CustomerServiceImpl implements CustomerService
         if (customerOptional.isPresent())
         {
 Customer updateDetails= customerOptional.get();
-           if (updateDetails.getName()!=null);{
+
+            if (updateDetails.getName()!=null){
 
             updateDetails.setName(customerRequest.getName());
            }
-            if (updateDetails.getEmail()!=null);{
+            if (updateDetails.getEmail()!=null){
 
             updateDetails.setEmail(customerRequest.getEmail());
         }
@@ -75,23 +77,23 @@ Customer updateDetails= customerOptional.get();
 
             //updateDetails.setPassword(passwordEncoder.encode(customerRequest.getPassword()));
         //}
-            if (updateDetails.getDob()!=null);{
+            if (updateDetails.getDob()!=null){
 
             updateDetails.setDob(customerRequest.getDob());
         }
-            if (updateDetails.getAddress()!=null);{
+            if (updateDetails.getAddress()!=null){
 
             updateDetails.setAddress(customerRequest.getAddress());
         }
-            if (updateDetails.getGender()!=null);{
+            if (updateDetails.getGender()!=null){
 
             updateDetails.setGender(customerRequest.getGender());
         }
-            if (updateDetails.getIdNumber()!=null);{
+            if (updateDetails.getIdNumber()!=null){
 
             updateDetails.setIdNumber(customerRequest.getIdNumber());
         }
-            if (updateDetails.getPhone()!=null);{
+            if (updateDetails.getPhone()!=null){
 
             updateDetails.setPhone(customerRequest.getPhone());
         }
