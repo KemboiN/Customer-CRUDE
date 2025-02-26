@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -28,7 +29,7 @@ class CustomerServiceImplTest {
     private CustomerRepo customerRepo;
 
     @Mock
-    private SmsService smsService;  //Mock the SmsService
+    private SmsService smsService;
 
     @InjectMocks
     private CustomerServiceImpl customerService;
@@ -70,15 +71,14 @@ class CustomerServiceImplTest {
     @Test
     void testCreateAccount() {
         when(customerRepo.findByEmail(customerRequest.getEmail())).thenReturn(Optional.empty());
-        when(customerRepo.save(any(Customer.class))).thenReturn(customer);
+       when(customerRepo.save(any(Customer.class))).thenReturn(customer);
 
         //Mock SmsService behavior
         doNothing().when(smsService).sendSms(any(MessageRequest.class));
 
         Response createdAccount = customerService.createAccount(customerRequest);
-
-        assertNotNull(createdAccount);
-        assertEquals("Congratulations, Successfully registered", createdAccount.getMessage());
+        assertThat(createdAccount).isNotNull();
+        assertThat(createdAccount.getMessage()).isEqualTo("Congratulations, Successfully registered");
 
         verify(customerRepo, times(1)).save(any(Customer.class));
         verify(smsService, times(1)).sendSms(any(MessageRequest.class)); //Verify SMS was sent
