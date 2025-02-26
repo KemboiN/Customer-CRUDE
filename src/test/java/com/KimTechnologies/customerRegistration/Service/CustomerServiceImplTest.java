@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,7 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceImplTest {
 
@@ -83,8 +84,66 @@ class CustomerServiceImplTest {
         verify(smsService, times(1)).sendSms(any(MessageRequest.class)); //Verify SMS was sent
     }
     @Test
-    void testUpdateDetails()
-    {
+    void testUpdateDetails_Success() {
+        // Arrange
+        Customer existingCustomer = new Customer();
+        existingCustomer.setEmail("nehemiahkimutai32@gmail.com");
+        existingCustomer.setName("Kimutai Nehemiah");
+        existingCustomer.setAddress("29 Sotik");
 
+        CustomerRequest updateRequest = new CustomerRequest();
+        updateRequest.setEmail("nehemiahkimutai32@gmail.com");
+        updateRequest.setName("Kemboi Nehemiah");
+        updateRequest.setAddress("01 Nairobi");
+
+        when(customerRepo.findByEmail("nehemiahkimutai32@gmail.com")).thenReturn(Optional.of(existingCustomer));
+        when(customerRepo.save(any(Customer.class))).thenReturn(existingCustomer);
+
+        // Act
+        Response response = customerService.updateDetails(updateRequest);
+
+        // Assert
+        assertEquals("Details updated Successfully", response.getMessage());
+        assertEquals("Kemboi Nehemiah", existingCustomer.getName());
+        assertEquals("01 Nairobi", existingCustomer.getAddress());
+        verify(customerRepo, times(1)).save(any(Customer.class));
+    }
+
+    @Test
+    void testUpdateDetails_CustomerNotFound() {
+        // Arrange
+        CustomerRequest updateRequest = new CustomerRequest();
+        updateRequest.setEmail("kimutaikemboi@gmail.com");
+
+        when(customerRepo.findByEmail("kimutaikemboi@gmail.com")).thenReturn(Optional.empty());
+
+        // Act
+        Response response = customerService.updateDetails(updateRequest);
+
+        // Assert
+        assertEquals("Account not Found!!", response.getMessage());
+        verify(customerRepo, never()).save(any(Customer.class));
+    }
+
+    @Test
+    void testUpdateDetails_NoChangesMade() {
+        // Arrange
+        Customer existingCustomer = new Customer();
+        existingCustomer.setEmail("nehemiahkimutai32@gmail.com");
+        existingCustomer.setName("Kimutai Nehemiah");
+
+        CustomerRequest updateRequest = new CustomerRequest();
+        updateRequest.setEmail("nehemiahkimutai32@gmail.com");
+        updateRequest.setName("Kimutai Nehemiah"); // No actual change
+
+        when(customerRepo.findByEmail("nehemiahkimutai32@gmail.com")).thenReturn(Optional.of(existingCustomer));
+        when(customerRepo.save(any(Customer.class))).thenReturn(existingCustomer);
+
+        // Act
+        Response response = customerService.updateDetails(updateRequest);
+
+        // Assert
+        assertEquals("Details updated Successfully", response.getMessage());
+        verify(customerRepo, times(1)).save(any(Customer.class));
     }
 }
