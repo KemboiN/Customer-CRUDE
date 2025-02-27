@@ -64,57 +64,42 @@ public class CustomerServiceImpl implements CustomerService
         if (customerOptional.isPresent())
         {
 Customer updateDetails= customerOptional.get();
-
             if (updateDetails.getName()!=null){
-
             updateDetails.setName(customerRequest.getName());
            }
             if (updateDetails.getEmail()!=null){
-
             updateDetails.setEmail(customerRequest.getEmail());
         }
-            //if (updateDetails.getPassword()!=null);{
-
-            //updateDetails.setPassword(passwordEncoder.encode(customerRequest.getPassword()));
-        //}
             if (updateDetails.getDob()!=null){
-
             updateDetails.setDob(customerRequest.getDob());
         }
             if (updateDetails.getAddress()!=null){
-
             updateDetails.setAddress(customerRequest.getAddress());
         }
             if (updateDetails.getGender()!=null){
-
             updateDetails.setGender(customerRequest.getGender());
         }
             if (updateDetails.getIdNumber()!=null){
-
             updateDetails.setIdNumber(customerRequest.getIdNumber());
         }
             if (updateDetails.getPhone()!=null){
-
             updateDetails.setPhone(customerRequest.getPhone());
         }
         repo.save(updateDetails);
             return Response.builder()
                     .message("Details updated Successfully").build();
-
         }
         else {
             return Response.builder()
                     .message("Account not Found!!").build();
         }
     }
-
     @Override
     public List<Customer> ListCustomers()
     {
         List <Customer> customerList =repo.findAll();
         return customerList;
     }
-
     @Override
     public Response deleteCustomer(Long customerId) {
         Optional<Customer>customerOptional=repo.findById(customerId);

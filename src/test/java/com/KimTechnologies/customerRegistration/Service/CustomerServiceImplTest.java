@@ -15,6 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,11 +92,15 @@ class CustomerServiceImplTest {
         existingCustomer.setEmail("nehemiahkimutai32@gmail.com");
         existingCustomer.setName("Kimutai Nehemiah");
         existingCustomer.setAddress("29 Sotik");
+        existingCustomer.setPhone("0713595565");
+        existingCustomer.setGender("Female");
 
         CustomerRequest updateRequest = new CustomerRequest();
         updateRequest.setEmail("nehemiahkimutai32@gmail.com");
         updateRequest.setName("Kemboi Nehemiah");
         updateRequest.setAddress("01 Nairobi");
+        updateRequest.setPhone("0751585460");
+        updateRequest.setGender("Male");
 
         when(customerRepo.findByEmail("nehemiahkimutai32@gmail.com")).thenReturn(Optional.of(existingCustomer));
         when(customerRepo.save(any(Customer.class))).thenReturn(existingCustomer);
@@ -103,9 +109,9 @@ class CustomerServiceImplTest {
         Response response = customerService.updateDetails(updateRequest);
 
         // Assert
-        assertEquals("Details updated Successfully", response.getMessage());
-        assertEquals("Kemboi Nehemiah", existingCustomer.getName());
-        assertEquals("01 Nairobi", existingCustomer.getAddress());
+        assertThat(response.getMessage()).isEqualTo("Details updated Successfully");
+        assertThat(existingCustomer.getGender()).isEqualTo("Male");
+        assertThat(existingCustomer.getAddress()).isEqualTo("01 Nairobi");
         verify(customerRepo, times(1)).save(any(Customer.class));
     }
 
@@ -134,7 +140,7 @@ class CustomerServiceImplTest {
 
         CustomerRequest updateRequest = new CustomerRequest();
         updateRequest.setEmail("nehemiahkimutai32@gmail.com");
-        updateRequest.setName("Kimutai Nehemiah"); // No actual change
+        updateRequest.setName("Kimutai Nehemiah"); // No  change
 
         when(customerRepo.findByEmail("nehemiahkimutai32@gmail.com")).thenReturn(Optional.of(existingCustomer));
         when(customerRepo.save(any(Customer.class))).thenReturn(existingCustomer);
@@ -146,4 +152,36 @@ class CustomerServiceImplTest {
         assertEquals("Details updated Successfully", response.getMessage());
         verify(customerRepo, times(1)).save(any(Customer.class));
     }
-}
+    @Test
+    void testListCustomers_NotEmpty()
+    {   // Arrange
+        Customer newCustomer = new Customer();
+        newCustomer.setName("Kimutai Nehemiah");
+        newCustomer.setEmail("nehemiahkimutai32@gmail.com");
+
+        Customer newCustomer1 = new Customer();
+        newCustomer1.setName("Kemboi Nehemiah");
+        newCustomer1.setEmail("kimutaikemboi750@gmail.com");
+        List<Customer> mockCustomers = Arrays.asList(newCustomer, newCustomer1);
+        // Mock repository response
+        when(customerRepo.findAll()).thenReturn(mockCustomers);
+        // Act
+        List<Customer> result = customerService.ListCustomers();
+        //Verify results
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(2);
+        assertThat(result).contains(newCustomer, newCustomer1);
+    }
+
+    @Test
+    void testListCustomers_ReturnsEmptyList() {
+        // Arrange:Mock an empty list
+        when(customerRepo.findAll()).thenReturn(List.of());
+        // Act
+        List<Customer> result = customerService.ListCustomers();
+        // Assert
+        assertThat(result).isEmpty();
+    }
+    }
+
+
