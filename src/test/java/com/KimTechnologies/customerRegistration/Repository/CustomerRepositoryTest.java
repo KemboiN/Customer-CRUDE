@@ -13,8 +13,7 @@ import java.time.LocalDate;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
-public class CustomerRepositoryTest
-{
+public class CustomerRepositoryTest {
     @Autowired
     CustomerRepo repo;
     CustomerRequest customerRequest;
@@ -22,32 +21,26 @@ public class CustomerRepositoryTest
 
     @BeforeEach
     void setUp() {
-        Customer customer= Customer.builder()
-                .name("Kimutai Kemboi Nehemiah")
-                .email("nehemiahkimutai32@gmail.com")
-                .phone("0713595565")
-                .dob(LocalDate.parse("1995-01-01"))
-                .address("001 Nairobi")
-                .gender("Male")
-                .idNumber("32428432")
-                .build();
-           repo.save(customer);
+        Customer customer = Customer.builder().name("Kimutai Kemboi Nehemiah").email("nehemiahkimutai32@gmail.com").phone("0713595565").dob(LocalDate.parse("1995-01-01")).address("001 Nairobi").gender("Male").idNumber("32428432").build();
+        repo.save(customer);
 
-                }
+    }
 
     @AfterEach
     void tearDown() {
-        customer=null;
+        customer = null;
         repo.deleteAll();
 
-                    }
-                    @Test
-                    void  testFindByEmail_Found(){
-      assertThat(repo.findByEmail("nehemiahkimutai32@gmail.com").isPresent()).isTrue();
+    }
 
-                    }
-                    @Test
-             void  testFindByEmail_Not_Found(){
+    @Test
+    void testFindByEmail_Found() {
+        assertThat(repo.findByEmail("nehemiahkimutai32@gmail.com").isPresent()).isTrue();
+
+    }
+
+    @Test
+    void testFindByEmail_Not_Found() {
 
         assertThat(repo.findByEmail("kimutaikemboi@gmail.com").isEmpty()).isTrue();
 

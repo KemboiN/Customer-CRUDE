@@ -12,5 +12,5 @@ public interface CustomerService {
     Response createAccount (CustomerRequest customerRequest);
     Response updateDetails(CustomerRequest customerRequest);
     List<Customer> ListCustomers();
-    Response deleteCustomer(Long customerId);
+    Response deleteCustomer(String email);
 }

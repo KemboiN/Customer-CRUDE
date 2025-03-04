@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceImplTest {
@@ -44,25 +45,9 @@ class CustomerServiceImplTest {
     void setUp() {
         autoCloseable = mock(AutoCloseable.class);
 
-        customer = Customer.builder()
-                .name("Kimutai Nehemiah")
-                .email("nehemiahkimutai32@gmail.com")
-                .phone("0713595565")
-                .dob(LocalDate.parse("1995-01-01"))
-                .gender("MALE")
-                .address("29 NAIROBI")
-                .idNumber("32428432")
-                .build();
+        customer = Customer.builder().name("Kimutai Nehemiah").email("nehemiahkimutai32@gmail.com").phone("0713595565").dob(LocalDate.parse("1995-01-01")).gender("MALE").address("29 NAIROBI").idNumber("32428432").build();
 
-        customerRequest = CustomerRequest.builder()
-                .name("Kimutai Nehemiah")
-                .email("nehemiahkimutai32@gmail.com")
-                .phone("0713595565")
-                .dob(LocalDate.parse("1995-01-01"))
-                .gender("MALE")
-                .address("29 NAIROBI")
-                .idNumber("32428432")
-                .build();
+        customerRequest = CustomerRequest.builder().name("Kimutai Nehemiah").email("nehemiahkimutai32@gmail.com").phone("0713595565").dob(LocalDate.parse("1995-01-01")).gender("MALE").address("29 NAIROBI").idNumber("32428432").build();
     }
 
     @AfterEach
@@ -73,7 +58,7 @@ class CustomerServiceImplTest {
     @Test
     void testCreateAccount() {
         when(customerRepo.findByEmail(customerRequest.getEmail())).thenReturn(Optional.empty());
-       when(customerRepo.save(any(Customer.class))).thenReturn(customer);
+        when(customerRepo.save(any(Customer.class))).thenReturn(customer);
 
         //Mock SmsService behavior
         doNothing().when(smsService).sendSms(any(MessageRequest.class));
@@ -85,6 +70,7 @@ class CustomerServiceImplTest {
         verify(customerRepo, times(1)).save(any(Customer.class));
         verify(smsService, times(1)).sendSms(any(MessageRequest.class)); //Verify SMS was sent
     }
+
     @Test
     void testUpdateDetails_Success() {
         // Arrange
@@ -140,8 +126,7 @@ class CustomerServiceImplTest {
 
         CustomerRequest updateRequest = new CustomerRequest();
         updateRequest.setEmail("nehemiahkimutai32@gmail.com");
-        updateRequest.setName("Kimutai Nehemiah"); // No  change
-
+        updateRequest.setName("Kimutai Nehemiah"); //No change
         when(customerRepo.findByEmail("nehemiahkimutai32@gmail.com")).thenReturn(Optional.of(existingCustomer));
         when(customerRepo.save(any(Customer.class))).thenReturn(existingCustomer);
 
@@ -152,9 +137,9 @@ class CustomerServiceImplTest {
         assertEquals("Details updated Successfully", response.getMessage());
         verify(customerRepo, times(1)).save(any(Customer.class));
     }
+
     @Test
-    void testListCustomers_NotEmpty()
-    {   // Arrange
+    void testListCustomers_NotEmpty() {   // Arrange
         Customer newCustomer = new Customer();
         newCustomer.setName("Kimutai Nehemiah");
         newCustomer.setEmail("nehemiahkimutai32@gmail.com");
@@ -182,6 +167,21 @@ class CustomerServiceImplTest {
         // Assert
         assertThat(result).isEmpty();
     }
+
+    @Test
+    void deleteCustomer_Success() {
+
+        String email= "nehemiahkimutai32@gmail.com";
+        Customer customer1=new Customer();
+        customer1.setEmail(email);
+
+        when(customerRepo.findByEmail(email)).thenReturn(Optional.of(customer1));
+        Response response = customerService.deleteCustomer(email);
+        verify(customerRepo,times(1)).deleteByEmail(email);
+        when(customerRepo.findByEmail(email)).thenReturn(Optional.empty());
+        assertThat(customerRepo.findByEmail(email)).isEmpty();
     }
+}
+
 
 

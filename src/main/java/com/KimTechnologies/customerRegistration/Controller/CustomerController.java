@@ -34,12 +34,13 @@ public class CustomerController
     @GetMapping("/all")
     public List<Customer> ReadCustomers()
     {
-        List <Customer> customerList =repo.findAll();
+        List <Customer> customerList;
+        customerList=repo.findAll();
         return customerList;
     }
     @DeleteMapping("/delete")
-    public  Response deleteCustomer(@RequestParam Long customerId)
+    public  Response deleteCustomer(@RequestParam String email)
     {
-       return customerService.deleteCustomer(customerId);
+       return customerService.deleteCustomer(email);
     }
 }
